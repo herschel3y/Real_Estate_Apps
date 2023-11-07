@@ -15,6 +15,14 @@ const TrendingComponent = () => {
         <View style={styles.textContainer}>
           <Text style={styles.titleText}>Developer Review</Text>
           <Text style={styles.subtitleText}>SIME DARBY PROPERTY</Text>
+          <View style={styles.starContainer}>
+            <Text style={styles.star}>⭐️</Text>
+            <Text style={styles.star}>⭐️</Text>
+            <Text style={styles.star}>⭐️</Text>
+            <Text style={styles.star}>⭐️</Text>
+            <Text style={styles.star}>⭐️</Text>
+          </View>
+
           {/* For the stars, you could use an icon library like react-native-vector-icons */}
           <Text style={styles.descriptionText}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -57,20 +65,32 @@ const styles = StyleSheet.create({
     fontSize:17,
   },
   subtitleText: {
-    color: '#000', // Gold color for stars
+    color: '#000', 
+    fontWeight: 'bold',// Gold color for stars
   },
   descriptionText: {
     // styles for the description text
   },
   button: {
-    backgroundColor: '#0066CC',
+    backgroundColor: '#00B2A9',
     padding: 10,
     marginTop: 10,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff',
+    color: '#000',
+    fontWeight: 'bold',
     textAlign: 'center',
+  },
+  starContainer: {
+    flexDirection: 'row', // This will layout the star Text components in a horizontal row
+    alignItems: 'center',
+    justifyContent: 'flex-start', 
+    marginTop:5,
+    marginBottom:5,
+  },
+  star: {
+    marginRight: 4, // Add a small space between each star
   },
 });
 
