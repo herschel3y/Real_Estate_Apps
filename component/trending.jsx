@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 const TrendingComponent = () => {
+  const [developerName, setDeveloperName] = useState(''); // State to store the developer's name
+  const [isLoading, setLoading] = useState(true); // State to handle loading status
+
+  useEffect(() => {
+    // Function to fetch data from your backend
+    const fetchTrendingData = async () => {
+      try {
+        const response = await fetch('http://10.0.2.2:8000/api/developers/');
+        const json = await response.json();
+        setDeveloperName(json[0]); // Assuming the API returns an array of names
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrendingData();
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Treading Project 🔥</Text>
+        <Text style={styles.headerText}>Trending Project 🔥</Text>
       </View>
       <View style={styles.bodyContainer}>
         <Image
@@ -14,8 +34,12 @@ const TrendingComponent = () => {
         />
         <View style={styles.textContainer}>
           <Text style={styles.titleText}>Developer Review</Text>
-          <Text style={styles.subtitleText}>SIME DARBY PROPERTY</Text>
-          <View style={styles.starContainer}>
+          {isLoading ? (
+            <Text>Loading...</Text> // Display a loading text or spinner
+          ) : (
+            <Text style={styles.subtitleText}>{developerName}</Text>
+          )}
+           <View style={styles.starContainer}>
             <Text style={styles.star}>⭐️</Text>
             <Text style={styles.star}>⭐️</Text>
             <Text style={styles.star}>⭐️</Text>
@@ -35,7 +59,6 @@ const TrendingComponent = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   cardContainer: {
     
